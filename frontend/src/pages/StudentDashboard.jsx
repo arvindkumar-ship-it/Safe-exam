@@ -5,6 +5,7 @@ import { examApi } from "../api/examApi";
 import Button from "../components/Button";
 import ErrorMessage from "../components/ErrorMessage";
 import Loading from "../components/Loading";
+import AppealForm from "../features/attempt/AppealForm";
 import { formatDateTime, formatDuration } from "../utils/formatting";
 
 const LIVE = ["ACTIVE", "UNDER_REVIEW"];
@@ -60,6 +61,7 @@ export default function StudentDashboard() {
               <div key={a.id} className="form-row">
                 <span className="badge">{a.status}</span> <span>{formatDateTime(a.submittedAt)}</span>
                 <ResultView attemptId={a.id} />
+                <details><summary>Appeal</summary><AppealForm attemptId={a.id} /></details>
               </div>
             ))}
           </section>

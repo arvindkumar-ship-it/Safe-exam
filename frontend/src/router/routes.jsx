@@ -6,6 +6,7 @@ import ExamPage from "../pages/ExamPage";
 import InstructorDashboard from "../pages/InstructorDashboard";
 import LoginPage from "../pages/LoginPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import ReviewPage from "../pages/ReviewPage";
 import StudentDashboard from "../pages/StudentDashboard";
 
 export function homePathFor(role) {
@@ -31,6 +32,9 @@ export default function AppRoutes() {
       </Route>
       <Route element={<ProtectedRoute roles={["INSTRUCTOR", "ADMIN"]} />}>
         <Route path="/instructor" element={<InstructorDashboard />} />
+      </Route>
+      <Route element={<ProtectedRoute roles={["REVIEWER", "INSTRUCTOR", "ADMIN"]} />}>
+        <Route path="/reviews" element={<ReviewPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
