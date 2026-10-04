@@ -2,9 +2,11 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "../auth/ProtectedRoute";
 import { useAuth } from "../auth/useAuth";
 import Loading from "../components/Loading";
+import ExamPage from "../pages/ExamPage";
 import InstructorDashboard from "../pages/InstructorDashboard";
 import LoginPage from "../pages/LoginPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import StudentDashboard from "../pages/StudentDashboard";
 
 export function homePathFor(role) {
   if (role === "STUDENT") return "/student";
@@ -23,6 +25,10 @@ export default function AppRoutes() {
     <Routes>
       <Route path="/" element={<HomeRedirect />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route element={<ProtectedRoute roles={["STUDENT"]} />}>
+        <Route path="/student" element={<StudentDashboard />} />
+        <Route path="/exam/:examId" element={<ExamPage />} />
+      </Route>
       <Route element={<ProtectedRoute roles={["INSTRUCTOR", "ADMIN"]} />}>
         <Route path="/instructor" element={<InstructorDashboard />} />
       </Route>
