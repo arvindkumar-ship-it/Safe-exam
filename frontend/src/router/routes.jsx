@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "../auth/ProtectedRoute";
 import { useAuth } from "../auth/useAuth";
 import Loading from "../components/Loading";
+import InstructorDashboard from "../pages/InstructorDashboard";
 import LoginPage from "../pages/LoginPage";
 import NotFoundPage from "../pages/NotFoundPage";
 
@@ -22,6 +23,9 @@ export default function AppRoutes() {
     <Routes>
       <Route path="/" element={<HomeRedirect />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route element={<ProtectedRoute roles={["INSTRUCTOR", "ADMIN"]} />}>
+        <Route path="/instructor" element={<InstructorDashboard />} />
+      </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
