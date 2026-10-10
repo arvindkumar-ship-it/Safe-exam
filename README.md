@@ -51,3 +51,5 @@ Last verified: backend 158 passed, frontend 46 passed, `vite build` OK.
 
 ## Launch checklist
 HTTPS · secrets in env · DB backups · CORS restricted · rate limiting · JWT expiry · Argon2 · admin MFA (future) · no passwords/answers in logs · privacy notice · load test.
+
+Audit repair scope, reproducible checks and remaining limitations: [AUDIT_FIXES.md](AUDIT_FIXES.md).

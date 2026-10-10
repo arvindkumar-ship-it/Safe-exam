@@ -12,6 +12,15 @@ from alembic.config import Config
 from fastapi.testclient import TestClient
 from sqlalchemy import text
 
+from urllib.parse import urlsplit, unquote
+
+def _require_test_database(url):
+    name = unquote(urlsplit(url).path.rsplit("/", 1)[-1])
+    if not name.endswith("_test"):
+        raise RuntimeError("Destructive test fixtures require a dedicated database ending in _test")
+
+_require_test_database(os.environ.get("DATABASE_URL", ""))
+
 from app.database import SessionLocal, engine
 from app.main import app
 from app.models.user import User
